@@ -1,0 +1,124 @@
+:root {
+  --color-navy: #183153;
+  --color-teal: #2f7d6d;
+  --color-cream: #f7f4ed;
+  --color-coral: #c65d47;
+  --color-gold: #d9a441;
+  --color-ink: #17202a;
+  --color-white: #ffffff;
+  --color-muted: #59636e;
+  --color-border: #d9d4c9;
+  --color-teal-dark: #225f53;
+  --color-error: #963f2e;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+
+  --radius-small: 0.4rem;
+  --radius-medium: 0.75rem;
+  --radius-large: 1.25rem;
+  --radius-pill: 999px;
+  --shadow-small: 0 3px 12px rgb(24 49 83 / 8%);
+  --shadow-card: 0 12px 32px rgb(24 49 83 / 10%);
+
+  --font-heading: 'Merriweather', Georgia, 'Times New Roman', serif;
+  --font-body: 'Source Sans 3', Arial, sans-serif;
+  --focus-outline: 3px solid var(--color-gold);
+  --content-width: 75rem;
+
+  color: var(--color-ink);
+  background: var(--color-cream);
+  font-family: var(--font-body);
+  font-size: 100%;
+  font-synthesis: none;
+  line-height: 1.5;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 20rem;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 20rem;
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  color: var(--color-teal-dark);
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+p,
+dl,
+dd {
+  margin-block-start: 0;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--color-navy);
+  font-family: var(--font-heading);
+  line-height: 1.2;
+}
+
+:focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: fixed;
+  z-index: 100;
+  top: var(--space-3);
+  left: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-small);
+  color: var(--color-white);
+  background: var(--color-navy);
+  font-weight: 700;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+[hidden] {
+  display: none !important;
+}

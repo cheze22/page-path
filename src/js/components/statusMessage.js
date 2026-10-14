@@ -2,17 +2,22 @@ const STATUS_CONTENT = {
   initial: {
     icon: '⌕',
     title: 'Start with a search',
-    message: 'Enter a title, author, or subject to explore Open Library.',
+    message: 'Enter a title, author, or subject to explore both book collections.',
   },
   loading: {
     icon: '',
     title: 'Searching the shelves…',
-    message: 'Open Library is looking for matching books.',
+    message: 'Open Library and Project Gutenberg are looking for matching books.',
   },
   empty: {
     icon: '∅',
     title: 'No books found',
     message: 'Try a different title, author, subject, or a broader search.',
+  },
+  filtered: {
+    icon: '≡',
+    title: 'No books match these filters',
+    message: 'Clear or adjust a filter to see more of this result page.',
   },
   error: {
     icon: '!',

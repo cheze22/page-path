@@ -10,6 +10,8 @@ export const DEFAULT_FIELDS = [
   'language',
   'cover_i',
   'ebook_access',
+  'subject',
+  'isbn',
 ]
 
 export class OpenLibraryError extends Error {

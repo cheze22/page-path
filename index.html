@@ -3,7 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Search Open Library and discover books with PagePath." />
+    <meta
+      name="description"
+      content="Discover books from Open Library and Project Gutenberg, then track your reading with PagePath."
+    />
     <meta name="theme-color" content="#183153" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>PagePath | Find your next book</title>
@@ -23,110 +26,193 @@
 
         <nav aria-label="Primary navigation">
           <ul class="nav-list">
-            <li><a class="nav-link active" href="./" aria-current="page">Discover</a></li>
             <li>
-              <a class="nav-link disabled" href="#" aria-disabled="true" tabindex="-1">
-                My Library <span class="nav-badge">Soon</span>
-              </a>
+              <a class="nav-link active" data-view-link="discover" href="#discover">Discover</a>
             </li>
-            <li>
-              <a class="nav-link disabled" href="#" aria-disabled="true" tabindex="-1">
-                Reading Goal <span class="nav-badge">Soon</span>
-              </a>
-            </li>
+            <li><a class="nav-link" data-view-link="library" href="#library">My Library</a></li>
+            <li><a class="nav-link" data-view-link="goal" href="#goal">Reading Goal</a></li>
           </ul>
         </nav>
       </div>
     </header>
 
     <main id="main-content">
-      <section class="search-hero" aria-labelledby="search-heading">
-        <div class="search-hero-inner">
-          <p class="eyebrow">Your next chapter starts here</p>
-          <h1 id="search-heading">Find your next book</h1>
-          <p class="hero-copy">
-            Search millions of titles from Open Library and follow the path to your next great read.
-          </p>
+      <div id="appNotice" class="app-notice" role="status" aria-live="polite" hidden></div>
 
-          <form id="searchForm" class="search-form" role="search" novalidate>
-            <div class="search-field">
-              <label for="searchInput">Book title, author, or subject</label>
-              <div class="search-control">
-                <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
-                  <circle cx="10.75" cy="10.75" r="6.75" />
-                  <path d="m16 16 4 4" />
-                </svg>
-                <input
-                  id="searchInput"
-                  name="search"
-                  type="search"
-                  placeholder="Try “The Hobbit”"
-                  autocomplete="off"
-                  enterkeyhint="search"
-                  aria-describedby="searchHelp searchError"
-                />
-                <button class="primary-button" type="submit">Search</button>
+      <div id="discoverView" data-view="discover">
+        <section class="search-hero" aria-labelledby="search-heading">
+          <div class="search-hero-inner">
+            <p class="eyebrow">Your next chapter starts here</p>
+            <h1 id="search-heading">Find your next book</h1>
+            <p class="hero-copy">
+              Search Open Library and Project Gutenberg, then make every book part of your path.
+            </p>
+
+            <form id="searchForm" class="search-form" role="search" novalidate>
+              <div class="search-field">
+                <label for="searchInput">Book title, author, or subject</label>
+                <div class="search-control">
+                  <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="10.75" cy="10.75" r="6.75" />
+                    <path d="m16 16 4 4" />
+                  </svg>
+                  <input
+                    id="searchInput"
+                    name="search"
+                    type="search"
+                    placeholder="Try “The Hobbit”"
+                    autocomplete="off"
+                    enterkeyhint="search"
+                    aria-describedby="searchHelp searchError"
+                  />
+                  <button class="primary-button" type="submit">Search</button>
+                </div>
+                <p id="searchHelp" class="field-help">
+                  Searches Open Library and Project Gutenberg together.
+                </p>
+                <p id="searchError" class="field-error" aria-live="assertive"></p>
               </div>
-              <p id="searchHelp" class="field-help">Searches book data from Open Library.</p>
-              <p id="searchError" class="field-error" aria-live="assertive"></p>
+            </form>
+          </div>
+        </section>
+
+        <section class="discover-section" aria-labelledby="resultsHeading">
+          <div class="discover-layout">
+            <aside class="filter-panel" aria-labelledby="filterHeading">
+              <div class="filter-heading-row">
+                <h2 id="filterHeading">Refine results</h2>
+                <button id="clearFilters" class="text-button" type="button">Clear</button>
+              </div>
+              <form id="filterForm" class="filter-form">
+                <label for="languageFilter">Language</label>
+                <select id="languageFilter" name="language">
+                  <option value="">All languages</option>
+                </select>
+
+                <label for="topicFilter">Subject or topic</label>
+                <input id="topicFilter" name="topic" type="search" placeholder="e.g. adventure" />
+
+                <fieldset class="year-fields">
+                  <legend>First publication year</legend>
+                  <label for="yearFrom">From</label>
+                  <input
+                    id="yearFrom"
+                    name="yearFrom"
+                    type="number"
+                    min="1"
+                    max="2100"
+                    inputmode="numeric"
+                  />
+                  <label for="yearTo">To</label>
+                  <input
+                    id="yearTo"
+                    name="yearTo"
+                    type="number"
+                    min="1"
+                    max="2100"
+                    inputmode="numeric"
+                  />
+                </fieldset>
+
+                <label for="sourceFilter">Source</label>
+                <select id="sourceFilter" name="source">
+                  <option value="">All sources</option>
+                  <option value="Open Library">Open Library</option>
+                  <option value="Project Gutenberg">Project Gutenberg</option>
+                </select>
+
+                <label class="checkbox-label" for="ebookFilter">
+                  <input id="ebookFilter" name="freeEbook" type="checkbox" /> Free ebook available
+                </label>
+              </form>
+            </aside>
+
+            <div class="results-panel">
+              <div class="results-heading-row">
+                <div>
+                  <p class="section-kicker">Discover</p>
+                  <h2 id="resultsHeading">Book results</h2>
+                </div>
+                <p id="resultCount" class="result-count" aria-live="polite"></p>
+              </div>
+
+              <div class="results-toolbar">
+                <p id="sourceStatus" class="source-status" aria-live="polite"></p>
+                <label for="sortSelect">Sort</label>
+                <select id="sortSelect">
+                  <option value="relevance">Relevance</option>
+                  <option value="year">Publication year</option>
+                  <option value="editions">Edition count</option>
+                  <option value="downloads">Download popularity</option>
+                </select>
+              </div>
+
+              <div
+                id="statusMessage"
+                class="status-message initial"
+                role="status"
+                aria-live="polite"
+                aria-atomic="true"
+              >
+                <span class="status-icon" aria-hidden="true">⌕</span>
+                <div>
+                  <h3>Start with a search</h3>
+                  <p>Enter a title, author, or subject to explore both book collections.</p>
+                </div>
+              </div>
+
+              <div id="resultsGrid" class="results-grid" aria-busy="false"></div>
+
+              <nav id="pagination" class="pagination" aria-label="Search results pages" hidden>
+                <button id="previousPage" class="secondary-button" type="button">
+                  <span aria-hidden="true">←</span> Previous
+                </button>
+                <p id="pageIndicator" aria-live="polite">Page 1</p>
+                <button id="nextPage" class="secondary-button" type="button">
+                  Next <span aria-hidden="true">→</span>
+                </button>
+              </nav>
             </div>
-          </form>
+          </div>
+        </section>
+      </div>
+
+      <section
+        id="libraryView"
+        class="app-view content-section"
+        data-view="library"
+        aria-labelledby="libraryHeading"
+        hidden
+      >
+        <div class="content-inner">
+          <p class="section-kicker">Your books</p>
+          <h1 id="libraryHeading">My Library</h1>
+          <p class="view-intro">
+            Keep books on the shelf that matches where you are in your reading path.
+          </p>
+          <div id="libraryShelves" class="library-shelves"></div>
         </div>
       </section>
 
-      <section class="discover-section" aria-labelledby="resultsHeading">
-        <div class="discover-layout">
-          <aside class="filter-panel" aria-labelledby="filterHeading">
-            <div class="filter-heading-row">
-              <h2 id="filterHeading">Refine results</h2>
-              <span class="planned-badge">Planned</span>
-            </div>
-            <p>Filters will be available in a future PagePath release.</p>
-            <div class="filter-preview" aria-hidden="true">
-              <span>Language</span>
-              <span>Publication year</span>
-              <span>E-book access</span>
-            </div>
-          </aside>
-
-          <div class="results-panel">
-            <div class="results-heading-row">
-              <div>
-                <p class="section-kicker">Discover</p>
-                <h2 id="resultsHeading">Book results</h2>
-              </div>
-              <p id="resultCount" class="result-count" aria-live="polite"></p>
-            </div>
-
-            <div
-              id="statusMessage"
-              class="status-message initial"
-              role="status"
-              aria-live="polite"
-              aria-atomic="true"
-            >
-              <span class="status-icon" aria-hidden="true">⌕</span>
-              <div>
-                <h3>Start with a search</h3>
-                <p>Enter a title, author, or subject to explore Open Library.</p>
-              </div>
-            </div>
-
-            <div id="resultsGrid" class="results-grid" aria-busy="false"></div>
-
-            <nav id="pagination" class="pagination" aria-label="Search results pages" hidden>
-              <button id="previousPage" class="secondary-button" type="button">
-                <span aria-hidden="true">←</span> Previous
-              </button>
-              <p id="pageIndicator" aria-live="polite">Page 1</p>
-              <button id="nextPage" class="secondary-button" type="button">
-                Next <span aria-hidden="true">→</span>
-              </button>
-            </nav>
-          </div>
+      <section
+        id="goalView"
+        class="app-view content-section"
+        data-view="goal"
+        aria-labelledby="goalHeading"
+        hidden
+      >
+        <div class="content-inner">
+          <p class="section-kicker">Keep moving</p>
+          <h1 id="goalHeading">Reading Goal</h1>
+          <p class="view-intro">Update pages and a finish date for books on your Reading shelf.</p>
+          <div id="readingGoals" class="reading-goals"></div>
         </div>
       </section>
     </main>
+
+    <dialog id="bookDialog" class="book-dialog" aria-labelledby="detailTitle">
+      <div id="bookDetail"></div>
+    </dialog>
 
     <footer class="site-footer">
       <div class="footer-inner">
@@ -138,7 +224,10 @@
           <span>PagePath</span>
         </a>
         <p>Thoughtful book discovery, one page at a time.</p>
-        <p>Book data provided by <a href="https://openlibrary.org/">Open Library</a>.</p>
+        <p>
+          Book data from <a href="https://openlibrary.org/">Open Library</a> and
+          <a href="https://gutendex.com/">Gutendex</a>.
+        </p>
       </div>
     </footer>
 

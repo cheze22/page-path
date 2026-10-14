@@ -2,6 +2,11 @@
   .results-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .saved-books-grid,
+  .reading-goals {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 48rem) {
@@ -43,13 +48,30 @@
     position: static;
   }
 
-  .filter-preview {
-    grid-template-columns: repeat(3, 1fr);
+  .filter-form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: end;
+  }
+
+  .year-fields {
+    grid-row: span 2;
+  }
+
+  .checkbox-label {
+    align-self: end;
   }
 
   .footer-inner {
     flex-direction: column;
     text-align: center;
+  }
+
+  .detail-layout {
+    grid-template-columns: minmax(11rem, 30%) minmax(0, 1fr);
+  }
+
+  .detail-content {
+    padding: var(--space-6);
   }
 }
 
@@ -106,12 +128,12 @@
     min-height: 3rem;
   }
 
-  .filter-preview {
-    display: none;
+  .filter-form {
+    grid-template-columns: 1fr;
   }
 
-  .filter-panel > p {
-    margin-bottom: 0;
+  .year-fields {
+    grid-row: auto;
   }
 
   .results-heading-row {
@@ -120,6 +142,15 @@
 
   .result-count {
     font-size: 0.875rem;
+  }
+
+  .results-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .results-toolbar select {
+    width: 100%;
   }
 
   .status-message {
@@ -171,6 +202,49 @@
     width: 100%;
     padding-inline: var(--space-3);
   }
+
+  .content-inner {
+    width: min(100% - 1.25rem, var(--content-width));
+  }
+
+  .saved-book-card {
+    grid-template-columns: minmax(7rem, 34%) minmax(0, 1fr);
+  }
+
+  .saved-book-card .book-cover {
+    min-height: 24rem;
+  }
+
+  .saved-book-content {
+    padding: var(--space-4);
+  }
+
+  .saved-controls,
+  .progress-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-layout {
+    display: block;
+  }
+
+  .detail-layout .detail-cover {
+    aspect-ratio: 3 / 2;
+    height: auto;
+  }
+
+  .detail-content {
+    padding: var(--space-5);
+  }
+
+  .detail-metadata {
+    grid-template-columns: 1fr;
+  }
+
+  .book-dialog {
+    width: calc(100% - 1rem);
+    max-height: calc(100vh - 1rem);
+  }
 }
 
 @media (max-width: 23.5rem) {
@@ -179,6 +253,15 @@
   }
 
   .book-cover {
+    aspect-ratio: 3 / 2;
+    min-height: 0;
+  }
+
+  .saved-book-card {
+    grid-template-columns: 1fr;
+  }
+
+  .saved-book-card .book-cover {
     aspect-ratio: 3 / 2;
     min-height: 0;
   }
